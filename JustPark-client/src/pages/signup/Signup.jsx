@@ -59,7 +59,15 @@ const Signup = () => {
     validateOnChange: false,
     onSubmit: async (values) => {
       axios
-        .post(userSignUP, values)
+        .post(userSignUP, {
+          username: values.email,
+          email: values.email,
+          first_name: values.first_name,
+          last_name: values.last_name,
+          password: values.password,
+          role: "user",
+          phone_number: "0000000000",
+        })
         .then((response) => {
           navigate("/login");
           toast.success("Signup successful! Redirecting to login page...", {

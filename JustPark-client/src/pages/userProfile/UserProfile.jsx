@@ -25,107 +25,28 @@ const UserProfile = () => {
                   />
 
                   <div className="flex flex-col space-y-5 sm:ml-8">
-                    <button
-                      type="button"
-                      className="py-3.5 px-7 text-base font-medium text-indigo-100 focus:outline-none bg-[#202142] rounded-lg border border-indigo-200 hover:bg-indigo-900 focus:z-10 focus:ring-4 focus:ring-indigo-200 "
-                    >
-                      Change picture
-                    </button>
-                    <button
-                      type="button"
-                      className="py-3.5 px-7 text-base font-medium text-indigo-900 focus:outline-none bg-white rounded-lg border border-indigo-200 hover:bg-indigo-100 hover:text-[#202142] focus:z-10 focus:ring-4 focus:ring-indigo-200 "
-                    >
-                      Delete picture
-                    </button>
-                  </div>
-                </div>
-
-                <div className="items-center mt-8 sm:mt-14 text-[#202142]">
-                  <div className="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
-                    <div className="w-full">
-                      <label
+                  <label
                         htmlFor="first_name"
                         className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white"
                       >
-                        Your first name
+                        Your User Name
                       </label>
                       <input
                         type="text"
                         id="first_name"
                         className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
                         placeholder="Your first name"
-                        defaultValue={user?.first_name}
+                        defaultValue={user?.username}
                         required
                       />
-                    </div>
+                  </div>
+                </div>
 
+                <div className="items-center mt-8 sm:mt-14 text-[#202142]">
+                  <div className="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
                     <div className="w-full">
-                      <label
-                        htmlFor="last_name"
-                        className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white"
-                      >
-                        Your last name
-                      </label>
-                      <input
-                        type="text"
-                        id="last_name"
-                        className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                        placeholder="Your last name"
-                        defaultValue={user?.last_name}
-                        required
-                      />
+                     
                     </div>
-                  </div>
-
-                  <div className="mb-2 sm:mb-6">
-                    <label
-                      htmlFor="email"
-                      className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white"
-                    >
-                      Your email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                      placeholder="your.email@mail.com"
-                      defaultValue={user?.email}
-                      required
-                    />
-                  </div>
-
-                  <div className="mb-2 sm:mb-6">
-                    <label
-                      htmlFor="Mobile Number"
-                      className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white"
-                    >
-                      Mobile Number
-                    </label>
-                    <input
-                      type="text"
-                      id="Mobile Number"
-                      className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                      placeholder="your Mobile Number"
-                      defaultValue={user?.phone_number}
-                      required
-                    />
-                  </div>
-
-                  <div className="mb-6">
-                    <label
-                      htmlFor="message"
-                      className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white"
-                    >
-                      Address
-                    </label>
-                    <textarea
-                      id="message"
-                      rows="4"
-                      className="block p-2.5 w-full text-sm text-indigo-900 bg-indigo-50 rounded-lg border border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500 "
-                      placeholder="Write your bio here..."
-                      defaultValue={user?.address}
-                      onChange={(e) => setSomething(e.target.defaultValue)}
-                    ></textarea>
                   </div>
 
                   <div className="flex justify-end">
