@@ -34,7 +34,7 @@ function App() {
   return (
     <div className="app-container">
       <Navbar />
-      <div className="content h-vh bg-gray-40">
+      <div className="content min-h-screen bg-gray-40">
         <Routes>
           <Route path="/login" exact element={<Login />} />
           <Route path="/signup" exact element={<Signup />} />

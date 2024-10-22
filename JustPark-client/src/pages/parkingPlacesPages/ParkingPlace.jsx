@@ -44,9 +44,9 @@ const ParkingPlacePage = () => {
       .catch((error) => console.error("Error fetching parking lots:", error));
   }, []);
   return (
-    <div className="m-3 min-h-[700px]">
+    <div className="m-3">
       <div className="p-4 ">
-        <h1 className="text-3xl text-gray-600 font-semibold  mb-5 mt-5 uppercase dark:text-white">
+        <h1 className="text-2xl text-gray-600 font-semibold  mb-5 mt-5 uppercase dark:text-white">
           Parking Places
         </h1>
         <hr className="border-gray-200" />

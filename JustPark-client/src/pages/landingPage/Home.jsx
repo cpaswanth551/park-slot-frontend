@@ -61,7 +61,7 @@ const Home = () => {
         <div>
           <Hero />
         </div>
-        <div className="container mx-auto h-[550px] m-0">
+        <div className="container mx-auto min-h-screen m-0">
           <h1 className="text-3xl text-gray-500 text-3xl font-semibold tracking-tight leading-none mb-5 mt-5 uppercase dark:text-white">
             Parking Places
           </h1>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../utils/axios";
 import { useSelector } from "react-redux";
-import { getReservations } from "../../utils/Constants";
+import { reservation_url } from "../../utils/Constants";
 import Sidemenu from "../../components/sidemenu/sidemenu";
 
 const ReservationPage = () => {
@@ -11,7 +11,7 @@ const ReservationPage = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios
-      .get(`${getReservations}${user.id}`, {
+      .get(`${reservation_url}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -37,10 +37,9 @@ const ReservationPage = () => {
   };
 
   return (
-    <div class="w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-[#161931]">
-      <Sidemenu />
-      <div className="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4">
-        <h1 className="text-3xl text-gray-400 font-semibold  mb-5 mt-5 uppercase dark:text-white">
+    <div class="w-full px-3 md:px-16 lg:px-28 md:flex-row text-[#161931] ">
+      <div className="w-full md:w-2/3 lg:w-3/4 min-h-screen">
+        <h1 className="text-2xl text-gray-600 font-semibold  mb-5 mt-5 uppercase dark:text-white ">
           Reservation Page
         </h1>
 
@@ -53,9 +52,7 @@ const ReservationPage = () => {
                 <th className="py-2 px-4 border-b">Place</th>
                 <th className="py-2 px-4 border-b">Slot Number</th>
                 <th className="py-2 px-4 border-b">Reservation Time</th>
-                <th className="py-2 px-4 border-b">User Name</th>
-                <th className="py-2 px-4 border-b">Car Number</th>
-                <th className="py-2 px-4 border-b">Car Details</th>
+
                 <th className="py-2 px-4 border-b"></th>
               </tr>
             </thead>
@@ -65,11 +62,9 @@ const ReservationPage = () => {
                   <td className="py-2 px-4 border-b">{res.slot.place.name}</td>
                   <td className="py-2 px-4 border-b">{res.slot.slot_number}</td>
                   <td className="py-2 px-4 border-b">
-                    {formatReservationTime(res.reservation_time)}
+                    {res.time_reserved} hours.
                   </td>
-                  <td className="py-2 px-4 border-b">{user.first_name}</td>
-                  <td className="py-2 px-4 border-b">{res.car_number}</td>
-                  <td className="py-2 px-4 border-b">{res.car_details}</td>
+
                   <td className="py-2 px-4 border-b">
                     <button
                       onClick={() => handleCancelReservation(res.id)}

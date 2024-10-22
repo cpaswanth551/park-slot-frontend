@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "../../utils/axios";
 import {
-  create_Checkout_Session,
-  create_bookingSlot_byuser,
-  getParkSlotbyId,
   getParkingSLotby_PlaceId_SlotNumber,
+  reservation_url,
 } from "../../utils/Constants";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -44,7 +42,7 @@ const ParkingBooking = () => {
         time_reserved: document.getElementById("parking-time").value,
         phone_number: document.getElementById("phone-number").value,
       };
-      await axios.post(`${create_bookingSlot_byuser}`, formData, {
+      await axios.post(`${reservation_url}/`, formData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

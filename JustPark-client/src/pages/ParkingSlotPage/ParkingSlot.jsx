@@ -10,7 +10,7 @@ const ParkingSlot = () => {
   const [parkingslots, setParkingslots] = useState([]);
   useEffect(() => {
     axios
-      .get(`${get_parkingPlace}${id}/`)
+      .get(`${get_parkingPlace}/${id}/`)
       .then((response) => {
         setParkingslots(response.data.slots);
       })
