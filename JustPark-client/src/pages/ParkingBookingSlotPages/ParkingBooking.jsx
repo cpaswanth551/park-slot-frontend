@@ -13,11 +13,9 @@ import { toast } from "react-toastify";
 const ParkingBooking = () => {
   const navigate = useNavigate();
   const { placeId, slotNumber } = useParams();
-  console.log(slotNumber);
   const token = useSelector((state) => state.token);
   const user = useSelector((state) => state.client);
   const [parkingSlot, setParkingSlot] = useState({});
-  const [paymentMode, setPaymentMode] = useState("razorpay");
 
   const handleError = (error) => {
     const errorMessage =
@@ -32,50 +30,7 @@ const ParkingBooking = () => {
   const handleCheckout = async (event) => {
     event.preventDefault();
     try {
-      paymentMode === "coh"
-        ? await handlecohCheckout()
-        : await handleRazorpayCheckout();
-    } catch (error) {
-      handleError(error);
-    }
-  };
-
-  const handleRazorpayCheckout = async () => {
-    try {
-      const response = await axios.post(create_Checkout_Session, {
-        amount: 1,
-        name: parkingSlot.name,
-      });
-
-      const { payment } = response.data;
-      const options = {
-        key: import.meta.env.RAZORPAY_KEY_ID,
-        amount: payment.amount,
-        currency: payment.currency,
-        name: payment.name,
-        description: payment.description,
-        order_id: payment.order_id,
-        handler: async function (response) {
-          try {
-            await updatePaymentStatus(response.razorpay_payment_id);
-            toast.success("Payment successful!", {
-              position: "top-right",
-            });
-          } catch (error) {
-            handleError(error);
-          }
-        },
-        prefill: {
-          name: "Aswanth C P",
-          email: "cpaswanthpalayad@gmail.com",
-          contact: "9447176508",
-        },
-        theme: {
-          color: "#F37254",
-        },
-      };
-      const rzp1 = new window.Razorpay(options);
-      rzp1.open();
+      await handlecohCheckout();
     } catch (error) {
       handleError(error);
     }
@@ -84,13 +39,10 @@ const ParkingBooking = () => {
   const handlecohCheckout = async () => {
     try {
       const formData = {
-        user: user,
-        slot: parkingSlot,
-        payment_id: "coh",
-        car_number: document.getElementById("car-number").value,
-        car_details: document.getElementById("car-details").value,
-        reservation_time: document.getElementById("parking-time").value,
-        payment_mode: "coh",
+        user_id: user.id,
+        slot_id: parkingSlot.id,
+        time_reserved: document.getElementById("parking-time").value,
+        phone_number: document.getElementById("phone-number").value,
       };
       await axios.post(`${create_bookingSlot_byuser}`, formData, {
         headers: {
@@ -105,40 +57,6 @@ const ParkingBooking = () => {
     }
   };
 
-  const updatePaymentStatus = async (paymentId) => {
-    try {
-      const carNumber = document.getElementById("car-number").value;
-      const carDetails = document.getElementById("car-details").value;
-      const parkingTime = document.getElementById("parking-time").value;
-
-      const formData = {
-        user: user,
-        slot: parkingSlot,
-        payment_id: paymentId,
-        car_number: carNumber,
-        car_details: carDetails,
-        reservation_time: parkingTime,
-        payment_mode: "razorpay",
-      };
-      axios
-        .post(`${create_bookingSlot_byuser}`, formData, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          navigate("/");
-          toast.success("Booking Successful!", { position: "top-right" });
-        })
-        .catch((error) => {
-          console.error("error occured");
-        });
-    } catch (error) {
-      // Update the local state to reflect the payment status
-      handleError(error);
-    }
-  };
   useEffect(() => {
     axios
       .get(`${getParkingSLotby_PlaceId_SlotNumber}${slotNumber}`, {
@@ -156,9 +74,9 @@ const ParkingBooking = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-6 gap-1 m-6">
+    <>
       {/* Left side: Booking Form */}
-      <div className="col-span-4">
+      <div className="m-5 min-h-[600px]">
         {parkingSlot.place && (
           <form
             className="max-w-3xl mx-auto p-4 rounded shadow-xl w-90%"
@@ -170,7 +88,7 @@ const ParkingBooking = () => {
                 Applicant Information
               </h3>
               <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-                Car details and application.
+                phone details and application.
               </p>
             </div>
 
@@ -203,32 +121,16 @@ const ParkingBooking = () => {
 
             <div className="mb-6">
               <label
-                htmlFor="car-number"
+                htmlFor="phone-number"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Car Number
+                Phone Number
               </label>
               <input
                 type="text"
-                id="car-number"
+                id="phone-number"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="KL-01-D-2535"
-                required
-              />
-            </div>
-
-            <div className="mb-6">
-              <label
-                htmlFor="car-details"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Car Details
-              </label>
-              <input
-                type="text"
-                id="car-details"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Benz G-wagon"
+                placeholder="9876543210"
                 required
               />
             </div>
@@ -249,31 +151,6 @@ const ParkingBooking = () => {
               />
             </div>
 
-            <div className="flex justify-between items-center mt-4">
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="payment-mode"
-                  value="razorpay"
-                  checked={paymentMode === "razorpay"}
-                  onChange={() => setPaymentMode("razorpay")}
-                  className="mr-2"
-                />
-                Razorpay
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="payment-mode"
-                  value="coh"
-                  checked={paymentMode === "coh"}
-                  onChange={() => setPaymentMode("coh")}
-                  className="mr-2"
-                />
-                Cash on Hand
-              </label>
-            </div>
-
             <button
               type="submit"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-4"
@@ -283,12 +160,7 @@ const ParkingBooking = () => {
           </form>
         )}
       </div>
-
-      {/* Right side: Pricing */}
-      <div className="col-span-2 p-4 bg-gray-100 dark:bg-gray-800 rounded-md">
-        {/* Pricing details */}
-      </div>
-    </div>
+    </>
   );
 };
 

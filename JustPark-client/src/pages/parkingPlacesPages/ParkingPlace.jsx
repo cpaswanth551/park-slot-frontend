@@ -21,7 +21,6 @@ const ParkingPlace = ({ parkingplace }) => (
             ? parkingplace.address
             : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturidebitis?"}
         </p>
-        <p className="text-lg text-green-500 mb-2">₹50.00</p>
         <button
           type="button"
           className="mt-4 rounded-sm bg-black px-2.5 py-1 text-[10px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
@@ -45,9 +44,9 @@ const ParkingPlacePage = () => {
       .catch((error) => console.error("Error fetching parking lots:", error));
   }, []);
   return (
-    <>
-      <div className="p-4 min-h-[700px]">
-        <h1 className="text-3xl text-gray-400 font-semibold  mb-5 mt-5 uppercase dark:text-white">
+    <div className="m-3 min-h-[700px]">
+      <div className="p-4 ">
+        <h1 className="text-3xl text-gray-600 font-semibold  mb-5 mt-5 uppercase dark:text-white">
           Parking Places
         </h1>
         <hr className="border-gray-200" />
@@ -57,7 +56,7 @@ const ParkingPlacePage = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

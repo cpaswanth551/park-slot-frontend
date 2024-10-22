@@ -23,30 +23,32 @@ const ParkingSlot = () => {
     rows.push(parkingslots.slice(i, i + columns));
   }
   return (
-    <div className="grid-container grid grid-cols-2 gap-4 p-4 m-6">
-      {rows.map((row, rowIndex) => (
-        <div className="grid-row flex" key={rowIndex}>
-          {row.map((slot, columnIndex) => (
-            <div
-              className={`grid-item p-4 border flex-grow ${
-                slot.is_booked ? "bg-red-500 text-white" : "bg-green-500"
-              }`}
-              key={columnIndex}
-            >
-              {slot.is_booked ? (
-                <span>{slot.slot_number}</span>
-              ) : (
-                <Link
-                  to={`/booking/${id}/${slot.slot_number}`}
-                  className="text-white"
-                >
-                  {slot.slot_number}
-                </Link>
-              )}
-            </div>
-          ))}
-        </div>
-      ))}
+    <div className="h-[700px] m-3">
+      <div className="grid-container grid grid-cols-2 gap-4 p-4 m-6">
+        {rows.map((row, rowIndex) => (
+          <div className="grid-row flex" key={rowIndex}>
+            {row.map((slot, columnIndex) => (
+              <div
+                className={`grid-item p-4 border flex-grow ${
+                  slot.is_booked ? "bg-red-500 text-white" : "bg-green-500"
+                }`}
+                key={columnIndex}
+              >
+                {slot.is_booked ? (
+                  <span>{slot.slot_number}</span>
+                ) : (
+                  <Link
+                    to={`/booking/${id}/${slot.slot_number}`}
+                    className="text-white"
+                  >
+                    {slot.slot_number}
+                  </Link>
+                )}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

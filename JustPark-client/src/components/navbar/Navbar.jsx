@@ -1,8 +1,8 @@
 import { setLogout } from "../../Redux/store";
 import React, { useCallback, useState } from "react";
-import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const menuItems = [
   {
@@ -38,12 +38,12 @@ export function Navbar() {
 
   return (
     <div className="text-gray-600 relative w-full bg-white p-3 shadow-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
+      <div className="mx-auto flex justify-between max-w-7xl items-center py-2 sm:px-6 lg:px-8">
         <Link
           to="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 text-2xl">
             <span>
               <img
                 src="images/logo.png"
@@ -60,7 +60,7 @@ export function Navbar() {
               <li key={item.name}>
                 <Link
                   to={item.to} // Changed here
-                  className="text-sm font-semibold text-gray-800 hover:text-gray-900"
+                  className="text-l font-semibold text-gray-800 hover:text-gray-900"
                 >
                   {item.name}
                 </Link>
