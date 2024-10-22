@@ -38,7 +38,7 @@ const ReservationPage = () => {
 
   return (
     <div class="w-full px-3 md:px-16 lg:px-28 md:flex-row text-[#161931] ">
-      <div className="w-full md:w-2/3 lg:w-3/4 min-h-screen">
+      <div className="lg:w-full">
         <h1 className="text-2xl text-gray-600 font-semibold  mb-5 mt-5 uppercase dark:text-white ">
           Reservation Page
         </h1>
@@ -46,23 +46,29 @@ const ReservationPage = () => {
         {loading ? (
           <p>Loading reservations...</p>
         ) : (
-          <table className="min-w-full bg-white border border-gray-300 shadow-md rounded-md overflow-hidden">
+          <table className="w-full h-auto bg-white border border-gray-300 shadow-md rounded-md overflow-hidden">
             <thead>
               <tr className="bg-gray-100">
                 <th className="py-2 px-4 border-b">Place</th>
                 <th className="py-2 px-4 border-b">Slot Number</th>
-                <th className="py-2 px-4 border-b">Reservation Time</th>
+                <th className="py-2 px-4 border-b">Price</th>
+                <th className="py-2 px-4 border-b">Time reserved</th>
+                <th className="py-2 px-4 border-b">Booking Time</th>
 
                 <th className="py-2 px-4 border-b"></th>
               </tr>
             </thead>
             <tbody>
               {reservation.map((res) => (
-                <tr key={res.id} className="hover:bg-gray-50 text-center">
+                <tr key={res.id} className="hover:bg-gray-50 text-lg text-center h-[80px]">
                   <td className="py-2 px-4 border-b">{res.slot.place.name}</td>
                   <td className="py-2 px-4 border-b">{res.slot.slot_number}</td>
+                  <td className="py-2 px-4 border-b">{res.slot.price}</td>
                   <td className="py-2 px-4 border-b">
                     {res.time_reserved} hours.
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    {formatReservationTime(res.reservation_time)}
                   </td>
 
                   <td className="py-2 px-4 border-b">

@@ -6,7 +6,7 @@ import { get_parkingPlace } from "../../utils/Constants";
 
 const ParkingPlace = ({ parkingplace }) => (
   <Link to={`/viewing/${parkingplace.id}`} className="text-blue-500">
-    <div className="w-[350px] border rounded overflow-hidden shadow-md transform transition-transform hover:scale-105">
+    <div className="w-auto border rounded overflow-hidden shadow-md transform transition-transform hover:scale-105">
       <img
         src="https://thearchitectsdiary.com/wp-content/uploads/2020/10/Parking-101-Creating-the-Perfect-Car-Park.jpg"
         alt="Laptop"
@@ -45,12 +45,12 @@ const ParkingPlacePage = () => {
   }, []);
   return (
     <div className="m-3">
-      <div className="p-4 ">
+      <div className="p-5">
         <h1 className="text-2xl text-gray-600 font-semibold  mb-5 mt-5 uppercase dark:text-white">
           Parking Places
         </h1>
         <hr className="border-gray-200" />
-        <div className="m-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="m-2 my-2 p-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {parkingplaces.map((parkingplace) => (
             <ParkingPlace key={parkingplace.id} parkingplace={parkingplace} />
           ))}

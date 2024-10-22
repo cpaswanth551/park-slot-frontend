@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "../../utils/axios";
 import { Link } from "react-router-dom";
 
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { get_parkingPlace } from "../../utils/Constants";
 import Hero from "../../components/hero/Hero";
-import { ToastContainer } from "react-toastify";
 
 import.meta.env.google_map_api;
 
@@ -61,7 +59,7 @@ const Home = () => {
         <div>
           <Hero />
         </div>
-        <div className="container mx-auto min-h-screen m-0">
+        <div className="container mx-auto m-0">
           <h1 className="text-3xl text-gray-500 text-3xl font-semibold tracking-tight leading-none mb-5 mt-5 uppercase dark:text-white">
             Parking Places
           </h1>
