@@ -60,7 +60,7 @@ const Home = () => {
           <Hero />
         </div>
         <div className="container mx-auto m-0">
-          <h1 className="text-3xl text-gray-500 text-3xl font-semibold tracking-tight leading-none mb-5 mt-5 uppercase dark:text-white">
+          <h1 className="text-3xl m-2 text-gray-500 text-3xl font-semibold tracking-tight leading-none mb-5 mt-5 uppercase">
             Parking Places
           </h1>
           <hr className="mb-3" />
