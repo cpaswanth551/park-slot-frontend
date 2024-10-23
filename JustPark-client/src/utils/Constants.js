@@ -1,5 +1,5 @@
 // export const baseUrl = "http://127.0.0.1:8000/api/v1/";
-export const baseUrl = "https://kf-parking-app.vercel.app/api/v1/";
+export const baseUrl = "https://kf-park-slot-app.vercel.app/api/v1/";
 
 export const userLogin = "auth/token";
 export const userSignUP = "auth/create";
